@@ -1,0 +1,1 @@
+"""Evidence-grounded adversarial review."""

@@ -1,0 +1,31 @@
+[llm]
+# proxy: plain HTTP to your existing LiteLLM gateway; no LiteLLM SDK needed.
+# sdk: install the sdk extra and use provider/model names below.
+backend = "proxy"
+base_url = "http://localhost:4000/v1"
+concurrency = 3
+timeout_seconds = 300
+max_output_tokens = 3500
+# Give the final synthesis more room while keeping other stages bounded.
+judge_max_output_tokens = 12000
+# Turn on only if all selected models support JSON-object mode.
+json_mode = false
+# Temperature is omitted by default for wider model compatibility.
+
+[models]
+# Replace with the aliases configured on YOUR LiteLLM proxy.
+planner = "deepinfra/deepseek-v4-flash"
+critic = "deepinfra/deepseek-v4-pro"
+judge = "deepinfra/deepseek-v4-pro"
+# Optional per-lens overrides; different model families can reduce shared blind spots.
+# novelty = "your-model-a"
+# validity = "your-model-b"
+# feasibility = "your-model-c"
+
+[search]
+initial_queries = 4
+followup_queries = 2
+results_per_query = 4
+max_sources = 20
+chars_per_source = 5000
+concurrency = 3
